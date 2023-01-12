@@ -5,13 +5,13 @@ import Row from './components/Row.jsx'
 import Form from './components/Form.jsx'
 
 const DBTest = [
-  {id: 1,
+  {id: 0,
   firstName: 'Nombre',
   lastName: 'Apellido',
   email: 'email@gmail.com',
   birthDate : {
-    day:'1',
-    month: '1',
+    day:'01',
+    month: '01',
     year: '1991'
   }
   },
@@ -21,9 +21,13 @@ function App() {
 
   const [table, setTable] = useState(DBTest)
 
+  const add = (newRow) => {
+    setTable([...table, newRow])
+  }
+
   return (
     <div className="App">
-      <Form id={table.length}/>
+      <Form id={table.length} callback={add}/>
       <table>
         <tbody> 
           {table.map(e=> <Row key={e.id} props={e}/>)}

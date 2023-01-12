@@ -1,4 +1,3 @@
-import { logDOM } from '@testing-library/react'
 import React, { useState } from 'react'
 import './form.css'
 
@@ -14,12 +13,12 @@ function Field({type, inputName, description, info, setInfo}) {
   return (
     <div className='Field'>
       <label htmlFor={inputName}>{description}</label>
-      <input type={type} id={inputName} name={inputName} value={info[inputName]} onChange={handleChange}/>
+      <input type={type} id={inputName} name={inputName} value={info[inputName]} onChange={handleChange} required/>
     </div>
   )
 }
 
-function Form({id}) {
+function Form({id, callback}) {
 
   const initialInfo = {
     firstName: '',
@@ -34,7 +33,6 @@ function Form({id}) {
     e.preventDefault()
 
     const arrBirthDate = info.birthDate.split('-')
-
     const response = {
       ...info,
       birthDate: {
@@ -45,7 +43,8 @@ function Form({id}) {
       id: id
     }
 
-    console.log(response);
+    callback(response);
+    setInfo(initialInfo)
   }
 
   return (
