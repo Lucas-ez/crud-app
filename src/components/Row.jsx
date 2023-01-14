@@ -1,8 +1,8 @@
 import React from 'react'
 
-function Row({props}) {
+function Row({info, remove}) {
 
-  const {birthDate, email, firstName, lastName} = {...props}
+  const {id, birthDate, email, firstName, lastName} = {...info}
 
   return (
     <tr>
@@ -10,6 +10,9 @@ function Row({props}) {
       <td>{lastName}</td>
       <td>{`${birthDate.day}/${birthDate.month}/${birthDate.year}`}</td>
       <td>{email}</td>
+      <td>
+        <button onClick={() => remove(id)}>X</button>
+      </td>
     </tr>
   )
 }

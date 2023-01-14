@@ -1,36 +1,45 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
-import { readDB, writeDB } from './db/db.js'
 import Row from './components/Row.jsx'
 import Form from './components/Form.jsx'
 
-const DBTest = [
-  {id: 0,
-  firstName: 'Nombre',
-  lastName: 'Apellido',
-  email: 'email@gmail.com',
-  birthDate : {
-    day:'01',
-    month: '01',
-    year: '1991'
-  }
-  },
-]
-
 function App() {
 
-  const [table, setTable] = useState(DBTest)
+  const [table, setTable] = useState([])
 
   const add = (newRow) => {
     setTable([...table, newRow])
   }
 
+  const remove = (id) => {
+    setTable([...table.filter(e => e.id !== id)])
+  }
+
+  useEffect(() => {
+    if(!localStorage.getItem('table')) {
+      localStorage.setItem('table', [])
+    } else {
+      setTable(JSON.parse(localStorage.getItem('table')))
+    }
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem('table', JSON.stringify(table))
+  }, [table])
+
   return (
     <div className="App">
       <Form id={table.length} callback={add}/>
-      <table>
+      <table className='table'>
         <tbody> 
-          {table.map(e=> <Row key={e.id} props={e}/>)}
+          <tr>
+            <td>First Name</td>
+            <td>Last Name</td>
+            <td>Birthdate </td>
+            <td>Email</td>
+            <td>Delete</td>
+          </tr>
+          {table.map(e=> <Row key={e.id} info={e} remove={remove}/>)}
         </tbody>
       </table>
     </div>

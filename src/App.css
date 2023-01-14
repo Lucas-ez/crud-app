@@ -1,4 +1,39 @@
 .App {
-  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 2rem;
+  gap: 1rem;
 }
 
+.table {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  border-collapse: collapse; 
+  margin: 25px 0; 
+  font-size: 1rem;
+  min-width: 800px; 
+  max-width: 1200px;
+}
+
+.table tbody tr:nth-of-type(1) {
+  background-color: #000000;
+  color: white;
+}
+
+.table tbody tr { 
+  border-bottom: 1px solid #dddddd;
+}
+
+.table tbody tr td{ 
+  padding: 0.6rem 1rem;
+}
+
+.table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
